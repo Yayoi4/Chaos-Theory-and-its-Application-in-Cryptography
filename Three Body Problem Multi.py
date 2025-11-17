@@ -21,7 +21,11 @@ Started = False #Boolean to check if program already began once (whether the obj
 #Stable solutions
 IA1 = [[vector(-1.0024277970,  0.0041695061, 0.0), vector(1.0024277970, -0.0041695061, 0.0), vector(0,0,0)],[vector(0.3489048974 , 0.5306305100, 0.0), vector(0.3489048974, 0.5306305100, 0.0), vector(-2*0.3489048974, -2*0.5306305100, 0.0)]]
 IA2 = [[vector(-1.0005576155,  -0.0029240248, 0.0), vector(1.0005576155, 0.0029240248, 0.0), vector(0,0,0)],[vector(0.3064392516 , 0.1263673939, 0.0), vector(0.3064392516, 0.1263673939, 0.0), vector(-2*0.3064392516, -2*0.1263673939, 0.0)]]
+IA17 = [[vector(-1.0074958476, 0.0081648176, 0.0), vector(1.0074958476, -0.0081648176, 0.0), vector(0,0,0)],[vector(0.1883232887, 0.5834831526, 0.0), vector(0.1883232887, 0.5834831526, 0.0), vector(-2*0.1883232887, -2*0.5834831526, 0.0)]]
+IA77 = [[vector(-1,0,0), vector(1,0,0), vector(0,0,0)],[vector(0.4159559963,0.2988672319,0.0),vector(0.4159559963,0.2988672319,0.0),vector(-2*0.4159559963,-2*0.2988672319,0.0)]]
+IA115 = [[vector(-1,0,0), vector(1,0,0), vector(0,0,0)],[vector(0.3369172422,0.2901238678,0.0),vector(0.3369172422,0.2901238678,0.0),vector(-2*0.3369172422,-2*0.2901238678,0.0)]]
 IB1 = [[vector(-0.9989071137,  -0.0001484864, 0.0), vector(0.9989071137, 0.0001484864, 0.0), vector(0,0,0)],[vector(0.4646402601  , 0.3963456869, 0.0), vector(0.4646402601, 0.3963456869, 0.0), vector(-2*0.4646402601, -2*0.3963456869, 0.0)]]
+IB2 = [[vector(-1.1770534081, -0.5225957568,0.0), vector(1.1770534081, 0.5225957568,0.0), vector(0,0,0)],[vector(0.2446132140,0.3305126876,0.0),vector(0.2446132140,0.3305126876,0.0),vector(-2*0.2446132140,-2*0.3305126876,0.0)]]
 IB6 = [[vector(-1.0043366457,  0.0085104316, 0.0), vector(1.0043366457, -0.0085104316, 0.0), vector(0,0,0)],[vector(0.3857847594 , 0.3732858410, 0.0), vector(0.3857847594, 0.3732858410, 0.0), vector(-2*0.3857847594, -2*0.3732858410, 0.0)]]
 IIC1 = [[vector(-0.9826146484,  -0.0411837391, 0.0), vector(0.9826146484, 0.0411837391, 0.0), vector(0,0,0)],[vector(0.2710001824 , 0.3415940623, 0.0), vector(0.2710001824, 0.3415940623, 0.0), vector(-2*0.2710001824, -2*0.3415940623, 0.0)]]
 
@@ -40,14 +44,14 @@ wtext(text="\nVelocities of the three bodies: ") #Text for vi_input
 v1_input = winput(bind=None, text="-1,0,0") #Input box for velocity of first body
 v2_input = winput(bind=None, text="0,0,0") #Input box for velocity of second body
 v3_input = winput(bind=None, text="1,0,0") #Input box for velocity of third body
-wtext(text="\nDifferent in masses of the copies")#text for dm_input
+wtext(text="\nDifferent in masses of the copies: ")#text for dm_input
 dm_input = winput(bind=None, text="0.1,0,0") #Input box for difference in masses of the three bodies between the copies
-wtext(text="\nDifferent in position between the copies") #text for dpi_input
+wtext(text="\nDifferent in position between the copies: ") #text for dpi_input
 #Input boxes for difference in position for the three bodies
 dp1_input = winput(bind=None, text="0,0,0")
 dp2_input = winput(bind=None, text="0,0,0")
 dp3_input = winput(bind=None, text="0,0,0")
-wtext(text="\nDifferent in velocity between the copies") #text for dvi_input
+wtext(text="\nDifferent in velocity between the copies: ") #text for dvi_input
 #Input boxes for difference in velocity for the three bodies
 dv1_input = winput(bind=None, text="0,0,0")
 dv2_input = winput(bind=None, text="0,0,0")
@@ -219,10 +223,18 @@ def Set(evt): #drop menu list for stable configuration, setUp
         case 2:
             fix = IA2
         case 3:
-            fix = IB1
+            fix = IA17
         case 4:
-            fix = IB6
+            fix = IA77
         case 5:
+            fix = IA115
+        case 6:
+            fix = IB1
+        case 7:
+            fix = IB2
+        case 8:
+            fix = IB6
+        case 9:
             fix = IIC1
     m1_input.text = "1.0"
     m2_input.text = "1.0"
@@ -234,24 +246,25 @@ def Set(evt): #drop menu list for stable configuration, setUp
     v2_input.text = str(fix[1][1].x)+","+str(fix[1][1].y)+","+str(fix[1][1].z)
     v3_input.text = str(fix[1][2].x)+","+str(fix[1][2].y)+","+str(fix[1][2].z)
 wtext(text="\nStable configurations: ")
-choicelist=['None','IA1','IA2','IB1','IB6','IIC1'] #choices
+choicelist=['None','IA1','IA2', 'IA17', 'IA77', 'IA115','IB1','IB2','IB6','IIC1'] #choices
 menu(bind=Set, choices=choicelist)
 wtext(text="\n")
 
 def RanDom(): #create random configuration
     #random mass between 0 and 3
-    m1_input.text = random.randrange(0,3)
-    m2_input.text = random.randrange(0,3)
-    m3_input.text = random.randrange(0,3)
+    m1_input.text = random.uniform(0,3)
+    m2_input.text = random.uniform(0,3)
+    m3_input.text = random.uniform(0,3)
     #random position and velocity between -2 and 2
-    v1_input.text = str(random.randrange(-2,2))+","+str(random.randrange(-2,2))+","+str(random.randrange(-2,2))
-    v2_input.text = str(random.randrange(-2,2))+","+str(random.randrange(-2,2))+","+str(random.randrange(-2,2))
-    v3_input.text = str(random.randrange(-2,2))+","+str(random.randrange(-2,2))+","+str(random.randrange(-2,2))
-    p1_input.text = str(random.randrange(-2,2))+","+str(random.randrange(-2,2))+","+str(random.randrange(-2,2))
-    p2_input.text = str(random.randrange(-2,2))+","+str(random.randrange(-2,2))+","+str(random.randrange(-2,2))
-    p3_input.text = str(random.randrange(-2,2))+","+str(random.randrange(-2,2))+","+str(random.randrange(-2,2))
+    v1_input.text = str(random.uniform(-2,2))+","+str(random.uniform(-2,2))+","+str(random.uniform(-2,2))
+    v2_input.text = str(random.uniform(-2,2))+","+str(random.uniform(-2,2))+","+str(random.uniform(-2,2))
+    v3_input.text = str(random.uniform(-2,2))+","+str(random.uniform(-2,2))+","+str(random.uniform(-2,2))
+    p1_input.text = str(random.uniform(-2,2))+","+str(random.uniform(-2,2))+","+str(random.uniform(-2,2))
+    p2_input.text = str(random.uniform(-2,2))+","+str(random.uniform(-2,2))+","+str(random.uniform(-2,2))
+    p3_input.text = str(random.uniform(-2,2))+","+str(random.uniform(-2,2))+","+str(random.uniform(-2,2))
 
 Random = button(bind=RanDom, text="Random Configuration")
+wtext(text="\n\n")
 
 bodies = []
 colors = [color.blue, color.red, color.green, color.yellow] #list of colors for every copy
